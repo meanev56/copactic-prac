@@ -1,5 +1,11 @@
+import { useEffect, useState } from "react"
 import Layout from "./components/layouts/Layout"
 import Welcome from "./components/layouts/Welcome"
+import Dashboard from './components/layouts/Dashboard'
+
+import WORDS from './utils/VOCAB.json'
+
+import { countdownIn24Hours, getWordByIndex, PLAN } from './utils'
 
 const App = () => {
 
@@ -99,10 +105,11 @@ const App = () => {
 
   const pages = {
         0: <Welcome handleCreateAccount={handleCreateAccount} username="hello world" name={name} setName={setName} />,
+        1: <Dashboard history={history} name={name} attempts={attempts} PLAN={PLAN} day={day} handleChangePage={handleChangePage} daysWords={daysWords} datetime={datetime} />,
   }
 
   return (
-    <Layout>{pages[0]}</Layout>
+    <Layout>{pages[selectedPage]}</Layout>
   )
 }
 
