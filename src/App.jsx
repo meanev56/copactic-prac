@@ -1,14 +1,14 @@
-import { useEffect, useState } from "react"
 import Layout from "./components/layouts/Layout"
 import Welcome from "./components/layouts/Welcome"
 import Dashboard from './components/layouts/Dashboard'
+import Challenge from './components/layouts/Challenge'
+import { useState, useEffect } from "react"
 
 import WORDS from './utils/VOCAB.json'
 
 import { countdownIn24Hours, getWordByIndex, PLAN } from './utils'
 
-const App = () => {
-
+function App() {
   const [selectedPage, setSelectedPage] = useState(0)
   // const selectedPage = 2 // zero is for welcome, 1 is for dashboard, 2 is for challenge
   const [name, setName] = useState('')
@@ -104,12 +104,15 @@ const App = () => {
   }, [])
 
   const pages = {
-        0: <Welcome handleCreateAccount={handleCreateAccount} username="hello world" name={name} setName={setName} />,
-        1: <Dashboard history={history} name={name} attempts={attempts} PLAN={PLAN} day={day} handleChangePage={handleChangePage} daysWords={daysWords} datetime={datetime} />,
+    0: <Welcome handleCreateAccount={handleCreateAccount} username="hello world" name={name} setName={setName} />,
+    1: <Dashboard history={history} name={name} attempts={attempts} PLAN={PLAN} day={day} handleChangePage={handleChangePage} daysWords={daysWords} datetime={datetime} />,
+    2: <Challenge day={day} daysWords={daysWords} handleChangePage={handleChangePage} handleIncrementAttempts={handleIncrementAttempts} handleCompleteDay={handleCompleteDay} PLAN={PLAN} />
   }
 
   return (
-    <Layout>{pages[selectedPage]}</Layout>
+    <Layout>
+      {pages[selectedPage]}
+    </Layout>
   )
 }
 
